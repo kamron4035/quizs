@@ -8,9 +8,9 @@ from django.core.cache import cache
 
 from .models import Question, Result, QuizType
 from .utils import check_answer
+from .filters import ResultFilter
 
 User = get_user_model()
-
 
 def qiuz(request):
     quizs = QuizType.objects.all()
@@ -33,7 +33,7 @@ def question(request, pk):
         return render(request, 'quizapp/result.html', context)
 
     if not cache.get('questions'):
-        cache.set('questions', questions, timeout=3600)
+        cache.set('questions', questions, timeout=20)
     questions = cache.get('questions')
     context = {
         'questions': questions,
@@ -42,7 +42,7 @@ def question(request, pk):
 
 
 def result_list(request):
-    results = Result.objects.all()
+    results = ResultFilter(request.GET, queryset=Result.objects.all())
     context = {
         'results': results
     }
