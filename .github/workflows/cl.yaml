@@ -33,7 +33,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run test
         env:
-          DJANGO_SETTINGS_MODULE: core.settings.local
+          DJANGO_SETTINGS_MODULE: QuizProject.settings.local
           SECRET_KEY: django-insecure-ht4)3u=$b4a7vgiym=j)f*5l$c0-#n0ydnl_(&b(^0kpl^7+7j
           SQL_ENGINE: django.db.backends.postgresql
           SQL_DATABASE: quizproject
